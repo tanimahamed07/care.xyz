@@ -10,7 +10,7 @@ const Footer = () => {
           <h2 className="text-xl font-bold text-primary">
             Care<span className="text-accent">.xyz</span>
           </h2>
-          <p className="text-sm text-neutral/70 mt-3">
+          <p className="text-sm  mt-3">
             Trusted baby sitting & elderly care services at your home.
           </p>
         </div>
@@ -33,7 +33,7 @@ const Footer = () => {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/my-bookings">My Bookings</Link>
+              <Link href="/booking">My Bookings</Link>
             </li>
             <li>
               <Link href="/login">Login</Link>
@@ -49,7 +49,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-center text-sm text-neutral/60 py-4 border-t">
+      <div className="text-center text-sm py-4 border-t">
         © {new Date().getFullYear()} Care.xyz — All Rights Reserved
       </div>
     </footer>

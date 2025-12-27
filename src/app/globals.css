@@ -1,28 +1,27 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default;
+}
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
   /* Brand */
-  --color-primary: oklch(58% 0.06 255); /* muted blue */
-  --color-secondary: oklch(52% 0.04 260); /* soft gray-blue */
-  --color-accent: oklch(66% 0.08 145); /* gentle green */
+ --color-primary: oklch(60% 0.18 200); /* soft lavender-blue */
+  --color-secondary: oklch(68% 0.25 20); /* deep coral-red */
+  --color-accent: oklch(70% 0.22 90);
 
-  /* Base */
+  /* Base - Clean background shades */
   --color-base-100: oklch(100% 0 0); /* pure white */
-  --color-base-200: oklch(96% 0.005 260); /* very light gray */
-  --color-base-300: oklch(92% 0.008 260); /* subtle border gray */
+  --color-base-200: oklch(96% 0.01 150); /* very light cream */
+  --color-base-300: oklch(92% 0.015 150); /* subtle border gray */
 
-  /* Neutral */
-  --color-neutral: oklch(22% 0.01 260); /* charcoal */
-  --color-neutral-content: oklch(98% 0 0);
+  /* Neutral - Modern muted grays */
+  --color-neutral: oklch(40% 0.02 260); /* charcoal */
+  --color-neutral-content: oklch(98% 0 0); /* almost white */
 
-  /* Feedback */
-  --color-success: oklch(64% 0.1 145);
-  --color-error: oklch(58% 0.12 25);
-  --color-warning: oklch(72% 0.1 85);
-  --color-info: oklch(62% 0.08 230);
+  /* Feedback - Bold and noticeable */
+  --color-success: oklch(72% 0.2 145); /* bright mint green */
+  --color-error: oklch(64% 0.28 25); /* strong reddish pink */
+  --color-warning: oklch(75% 0.18 70); /* golden yellow */
+  --color-info: oklch(65% 0.15 230); /* soft sky blue */
 }
-
-
-@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
