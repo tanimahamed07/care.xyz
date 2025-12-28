@@ -9,7 +9,7 @@ const Banner = () => {
         <div className=" py-12 flex flex-col-reverse md:flex-row items-center gap-16">
           {/* Text Content */}
           <div className="md:w-1/2 text-center md:text-left">
-            <span className="inline-block mb-4 px-4 py-1 rounded-full bg-primary/10 text-primary font-semibold text-sm">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-bold uppercase tracking-wider mb-6">
               Trusted Care Platform
             </span>
 

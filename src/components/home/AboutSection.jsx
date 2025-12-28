@@ -62,20 +62,21 @@ const AboutSection = () => {
                 <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
                 Our Mission
               </div>
-
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-neutral leading-tight">
                 Dedicated to providing{" "}
                 <span className="text-primary italic">peace of mind</span> for
                 your family.
               </h2>
-
-              <p className="text-base md:text-lg text-neutral/70 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                At <span className="font-bold text-2xl text-primary">Care</span>
-                <span className="text-accent">.xyz</span> we understand that
-                finding a trustworthy caregiver is a major decision. Our
-                platform is built to make caregiving **easy, secure, and
-                accessible**.
-              </p>
+              <div className="border-l-4 border-error">
+                <p className="text-base  md:text-lg text-neutral/70 leading-relaxed max-w-2xl mx-auto px-4 lg:mx-0">
+                  At{" "}
+                  <span className="font-bold text-2xl text-primary">Care</span>
+                  <span className="text-accent">.xyz</span> we understand that
+                  finding a trustworthy caregiver is a major decision. Our
+                  platform is built to make caregiving **easy, secure, and
+                  accessible**.
+                </p>
+              </div>
 
               <div className="pt-4 space-y-3 md:space-y-4 text-left">
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-base-200/50 lg:bg-transparent hover:bg-base-200 transition-colors border border-transparent hover:border-base-300">

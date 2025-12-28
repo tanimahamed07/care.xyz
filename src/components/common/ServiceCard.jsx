@@ -2,12 +2,10 @@ import React from "react";
 import { FaArrowRight, FaClock, FaCalendarDay } from "react-icons/fa";
 import Image from "next/image";
 
-const ServiceCard = ({service}) => {
+const ServiceCard = ({ service }) => {
+  console.log(service?.image)
   return (
-    <div
-      key={service.id}
-      className="group bg-base-100 border border-base-300 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2"
-    >
+    <div className="group bg-base-100 border border-base-300 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
       <div className="relative aspect-[4/3] overflow-hidden bg-base-200">
         <Image
           width={400}
