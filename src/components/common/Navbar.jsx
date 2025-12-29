@@ -5,14 +5,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "./Container";
 import NavLink from "../home/NavLink";
+import { signOut, useSession } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+  console.log("------------->", session, status);
 
-  const user = {
-    email: "user@email.com",
-    photoURL: "https://i.pravatar.cc/40",
-  };
+  // const user = {
+  //   email: "user@email.com",
+  //   photoURL: "https://i.pravatar.cc/40",
+  // };
 
   const logout = () => {
     console.log("Logout clicked");
@@ -55,7 +59,7 @@ const Navbar = () => {
 
             <div className="h-6 w-[1px] bg-base-300 mx-2"></div>
 
-            {user ? (
+            {session?.user ? (
               <div className="dropdown dropdown-end">
                 <label
                   tabIndex={0}
@@ -65,7 +69,7 @@ const Navbar = () => {
                     <Image
                       width={40}
                       height={40}
-                      src={user.photoURL}
+                      src={session?.user?.image || "https://i.pravatar.cc/40"}
                       alt="profile"
                     />
                   </div>
@@ -75,8 +79,12 @@ const Navbar = () => {
                   className="dropdown-content mt-4 p-2 shadow-2xl bg-base-100 rounded-2xl w-64 border border-base-200"
                 >
                   <div className="px-4 py-3 border-b border-base-100 mb-2">
-                    <p className="text-xs font-semibold text-base-content/50 uppercase tracking-wider">Account</p>
-                    <p className="text-sm font-medium truncate">{user.email}</p>
+                    <p className="text-xs font-semibold text-base-content/50 uppercase tracking-wider">
+                      Account
+                    </p>
+                    <p className="text-sm font-medium truncate">
+                      {session?.user?.email}
+                    </p>
                   </div>
                   <li>
                     <Link
@@ -88,7 +96,7 @@ const Navbar = () => {
                   </li>
                   <li className="p-2">
                     <button
-                      onClick={logout}
+                      onClick={() => signOut()}
                       className="btn btn-primary btn-outline btn-sm w-full rounded-lg"
                     >
                       Logout
@@ -101,7 +109,10 @@ const Navbar = () => {
                 <Link href="/login" className="btn btn-ghost btn-sm font-bold">
                   Login
                 </Link>
-                <Link href="/register" className="btn btn-primary btn-sm px-6 rounded-full shadow-lg shadow-primary/20">
+                <Link
+                  href="/signup"
+                  className="btn btn-primary btn-sm px-6 rounded-full shadow-lg shadow-primary/20"
+                >
                   Register
                 </Link>
               </div>
@@ -112,8 +123,19 @@ const Navbar = () => {
           <div className="md:hidden">
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
                 </svg>
               </label>
               <ul
@@ -121,25 +143,42 @@ const Navbar = () => {
                 className="menu menu-md dropdown-content mt-4 p-4 shadow-2xl bg-base-100 rounded-2xl w-72 border border-base-200 z-[1]"
               >
                 <li className="menu-title text-primary">Menu</li>
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/services">Services</Link></li>
-                <li><Link href="/booking">My Bookings</Link></li>
-                
+                <li>
+                  <Link href="/">Home</Link>
+                </li>
+                <li>
+                  <Link href="/services">Services</Link>
+                </li>
+                <li>
+                  <Link href="/booking">My Bookings</Link>
+                </li>
+
                 <div className="divider my-2"></div>
-                
-                {user ? (
+
+                {session?.user?.email ? (
                   <>
-                    <li><Link href="/dashboard" className="font-bold">Dashboard</Link></li>
                     <li>
-                      <button onClick={logout} className="btn btn-primary btn-sm text-white mt-2">
+                      <Link href="/dashboard" className="font-bold">
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => signOut()}
+                        className="btn btn-primary btn-sm text-white mt-2"
+                      >
                         Logout
                       </button>
                     </li>
                   </>
                 ) : (
                   <div className="grid grid-cols-2 gap-2 mt-2">
-                    <Link href="/login" className="btn btn-ghost btn-sm">Login</Link>
-                    <Link href="/register" className="btn btn-primary btn-sm">Register</Link>
+                    <Link href="/login" className="btn btn-ghost btn-sm">
+                      Login
+                    </Link>
+                    <Link href="/signup" className="btn btn-primary btn-sm">
+                      Register
+                    </Link>
                   </div>
                 )}
               </ul>
