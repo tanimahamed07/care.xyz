@@ -1,11 +1,12 @@
 import React from 'react';
+import BookingPage from './[id]/page';
 
-const booking = () => {
-    return (
-        <div>
-            Booking
-        </div>
-    );
+const Booking = () => {
+  return (
+    <div>
+      <BookingPage></BookingPage>
+    </div>
+  );
 };
 
-export default booking;
+export default Booking;

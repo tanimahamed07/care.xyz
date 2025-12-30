@@ -1,9 +1,10 @@
 import React from "react";
 import { FaArrowRight, FaClock, FaCalendarDay } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 
 const ServiceCard = ({ service }) => {
-  console.log(service?.image)
+  console.log(service?.image);
   return (
     <div className="group bg-base-100 border border-base-300 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
       <div className="relative aspect-[4/3] overflow-hidden bg-base-200">
@@ -54,10 +55,13 @@ const ServiceCard = ({ service }) => {
           </div>
         </div>
 
-        <button className="mt-4 w-full py-3 bg-primary/10 text-primary hover:bg-primary hover:text-primary-content rounded-2xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 group/btn">
-          Book Now
+        <Link
+          href={`/services/${service._id}`}
+          className="mt-4 w-full py-3 bg-primary/10 text-primary hover:bg-primary hover:text-primary-content rounded-2xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+        >
+          Details
           <FaArrowRight className="text-xs transition-transform group-hover/btn:translate-x-1" />
-        </button>
+        </Link>
       </div>
     </div>
   );
