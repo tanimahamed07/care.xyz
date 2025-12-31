@@ -3,43 +3,52 @@ import bcrypt from "bcrypt";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { use } from "react";
 
 export const authOptions = {
-  // Configure one or more authentication providers
+  session: {
+    strategy: "jwt",
+  },
+
   providers: [
     CredentialsProvider({
       name: "Credentials",
-      credentials: {},
-      async authorize(credentials, req) {
-        console.log(credentials);
+      credentials: {
+        email: {},
+        password: {},
+      },
+      async authorize(credentials) {
         const userCollection = await dbConnect("users");
+
         const user = await userCollection.findOne({
           email: credentials.email,
         });
 
-        if (!user) {
-          return null;
-        }
+        if (!user) return null;
 
         const isPasswordValid = await bcrypt.compare(
           credentials.password,
           user.password
         );
 
-        if (!isPasswordValid) {
-          return null;
-        }
-        return user;
+        if (!isPasswordValid) return null;
+
+        return {
+          id: user._id.toString(),
+          name: user.name,
+          email: user.email,
+          role: user.role, 
+        };
       },
     }),
+
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account }) {
       if (account.provider === "google") {
         const userCollection = await dbConnect("users");
 
@@ -48,32 +57,32 @@ export const authOptions = {
         });
 
         if (!existingUser) {
-          const newUser = {
-            provider: account?.provider,
+          await userCollection.insertOne({
+            provider: "google",
             name: user.name,
             email: user.email,
             image: user.image,
             role: "user",
-          };
-          const result = await userCollection.insertOne(newUser);
-          return true;
+          });
+
+          user.role = "user"; 
+        } else {
+          user.role = existingUser.role; 
         }
       }
+      return true;
     },
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
-    async session({ session, user, token }) {
-      if (token?.role) {
-        session.user.role = token.role;
-      }
-      return session;
-    },
-    async jwt({ token, user, account, profile, isNewUser }) {
+
+    async jwt({ token, user }) {
       if (user?.role) {
         token.role = user.role;
       }
       return token;
+    },
+
+    async session({ session, token }) {
+      session.user.role = token.role;
+      return session;
     },
   },
 };
