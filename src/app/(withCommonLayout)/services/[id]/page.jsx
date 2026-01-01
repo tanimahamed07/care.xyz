@@ -15,7 +15,6 @@ const ServiceDetails = async ({ params }) => {
   const { id } = await params;
   const service = await getServiceById(id);
 
-  console.log("service======>", service);
   if (!service)
     return <div className="py-20 text-center">Service not found!</div>;
 

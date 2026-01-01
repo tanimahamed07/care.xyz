@@ -14,10 +14,12 @@ import { useParams } from "next/navigation";
 import { getServiceById } from "@/services/services.details";
 import { booking } from "@/services/services.bookings";
 import Swal from "sweetalert2";
+import { useSession } from "next-auth/react";
 
 const BookingPage = ({ params }) => {
   const [service, setService] = useState();
   const { id } = useParams();
+  const { data: session } = useSession();
 
   useEffect(() => {
     getServiceById(id).then((service) => setService(service));
@@ -69,7 +71,7 @@ const BookingPage = ({ params }) => {
       : dailyPrice * (watchedDuration || 0);
 
   const onSubmit = (data) => {
-    const formData = { ...data, totalCost, serviceName: service?.name };
+    const formData = { ...data, totalCost, serviceName: service?.name, email: session?.user?.email, image: service?.image };
     console.log("Final Booking Data:", formData);
 
     booking(formData)

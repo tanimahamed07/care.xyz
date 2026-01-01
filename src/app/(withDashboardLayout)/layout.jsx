@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut, useSession } from "next-auth/react"; // NextAuth ইমপোর্ট করা হয়েছে
+import { signOut, useSession } from "next-auth/react"; 
 import {
   FaHome,
   FaCalendarCheck,
@@ -17,7 +17,7 @@ import Image from "next/image";
 
 const DashboardLayout = ({ children }) => {
   const pathname = usePathname();
-  const { data: session } = useSession(); // সেশন ডেটা নেয়া হয়েছে
+  const { data: session } = useSession(); 
 
   const menuItems = [
     {
@@ -46,13 +46,10 @@ const DashboardLayout = ({ children }) => {
     <div className="drawer lg:drawer-open bg-base-100 min-h-screen">
       <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
 
-      {/* Main Content */}
       <div className="drawer-content flex flex-col">
-        {/* Top Navbar - আপনার মেইন নেভবারের স্টাইলে আপডেট করা হয়েছে */}
         <header className="sticky top-0 z-30 w-full bg-base-100/70 backdrop-blur-md border-b border-base-200 px-6 py-5">
           <div className="flex items-center justify-between max-w-7xl mx-auto w-full">
             
-            {/* Mobile Menu Toggle & Title */}
             <div className="flex items-center gap-4">
               <div className="lg:hidden">
                 <label
@@ -72,9 +69,8 @@ const DashboardLayout = ({ children }) => {
               </div>
             </div>
 
-            {/* Right Actions - মেইন নেভবারের ড্রপডাউন স্টাইল */}
             <div className="flex items-center gap-3">
-              {/* Notification Bell */}
+
               <button className="btn btn-ghost btn-circle relative">
                 <FaBell className="text-xl text-neutral/70" />
                 <span className="absolute top-2 right-2 badge badge-xs badge-accent animate-pulse"></span>
@@ -82,7 +78,6 @@ const DashboardLayout = ({ children }) => {
 
               <div className="h-6 w-[1px] bg-base-300 mx-1"></div>
 
-              {/* User Profile Dropdown */}
               <div className="dropdown dropdown-end">
                 <label
                   tabIndex={0}
@@ -139,7 +134,6 @@ const DashboardLayout = ({ children }) => {
         </main>
       </div>
 
-      {/* Sidebar - ব্র্যান্ডিং এবং মেনু আইটেম */}
       <div className="drawer-side z-40">
         <label
           htmlFor="dashboard-drawer"
@@ -148,7 +142,7 @@ const DashboardLayout = ({ children }) => {
         ></label>
 
         <aside className="w-80 bg-base-100 min-h-full border-r border-base-200 flex flex-col">
-          {/* Logo Section */}
+
           <div className="p-8 border-b border-base-100">
             <Link href="/" className="group flex items-center gap-1">
               <span className="text-3xl font-black tracking-tighter text-primary">
@@ -163,7 +157,7 @@ const DashboardLayout = ({ children }) => {
             </div>
           </div>
 
-          {/* Navigation Menu */}
+
           <nav className="flex-1 p-4 mt-4">
             <ul className="space-y-2">
               {menuItems.map((item) => {
@@ -189,7 +183,6 @@ const DashboardLayout = ({ children }) => {
             </ul>
           </nav>
 
-          {/* Logout Section */}
           <div className="p-4 border-t border-base-200">
             <button 
               onClick={() => signOut()}

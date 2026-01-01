@@ -36,7 +36,7 @@ export const authOptions = {
           id: user._id.toString(),
           name: user.name,
           email: user.email,
-          role: user.role, 
+          role: user.role,
         };
       },
     }),
@@ -63,11 +63,13 @@ export const authOptions = {
             email: user.email,
             image: user.image,
             role: "user",
+            nidNumber: "Not Provided",
+            contact: "Not Provided",
           });
 
-          user.role = "user"; 
+          user.role = "user";
         } else {
-          user.role = existingUser.role; 
+          user.role = existingUser.role;
         }
       }
       return true;

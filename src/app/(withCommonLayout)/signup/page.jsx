@@ -7,19 +7,19 @@ import {
   FaLock,
   FaIdCard,
   FaPhone,
-  FaGoogle,
 } from "react-icons/fa";
 import Container from "@/components/common/Container";
 import { signup } from "@/services/users.service";
-import Google from "next-auth/providers/google";
 import GoogleButton from "@/components/auth/GoogleButton";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
   const [error, setError] = useState("");
-
+  const router = useRouter();
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error message
+    setError("");
 
     const form = e.target;
     const fullName = form.fullName.value;
@@ -28,20 +28,16 @@ const RegisterPage = () => {
     const contact = form.contact.value;
     const password = form.password.value;
 
-    // --- Simple Password Validation ---
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const isLongEnough = password.length >= 6;
-
-    if (!isLongEnough) {
+    // password validation
+    if (password.length < 6) {
       setError("Password must be at least 6 characters long.");
       return;
     }
-    if (!hasUpperCase) {
+    if (!/[A-Z]/.test(password)) {
       setError("Password must contain at least one uppercase letter.");
       return;
     }
-    if (!hasLowerCase) {
+    if (!/[a-z]/.test(password)) {
       setError("Password must contain at least one lowercase letter.");
       return;
     }
@@ -54,11 +50,26 @@ const RegisterPage = () => {
       password,
       role: "user",
     };
-    const res = await signup(formData);
-    if (res?.status !== 201) {
-      setError("Failed to register user");
+
+    try {
+      const result = await signup(formData);
+
+      if (result?.data?.acknowledged) {
+        const loginRes = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
+
+        if (!loginRes?.error) {
+          router.push("/");
+        } else {
+          setError("Auto login failed");
+        }
+      }
+    } catch (err) {
+      setError(err.message || "Something went wrong");
     }
-    console.log(res);
   };
 
   return (

@@ -7,8 +7,8 @@ import Container from "@/components/common/Container";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Swal from "sweetalert2";
-import Google from "next-auth/providers/google";
 import GoogleButton from "@/components/auth/GoogleButton";
+import { signup } from "@/services/users.service";
 
 const LoginPage = () => {
   const params = useSearchParams();
@@ -18,28 +18,21 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     const form = e.target;
-    const formData = {
-      email: form.email.value,
-      password: form.password.value,
-    };
+    const email = form.email.value;
+    const password = form.password.value;
 
     const result = await signIn("credentials", {
-      email: formData.email,
-      password: formData.password,
-      // redirect: false,
-      callbackUrl: callBack,
+      email,
+      password,
+      redirect: false,
     });
 
-    if (!result.ok) {
-      Swal.fire(
-        "Error",
-        "Email or password not matched. Try Google Login or Register",
-        "error"
-      );
-    } else {
-      Swal.fire("Success", "Welcome to Kidz Hub", "success");
+    if (!result?.error) {
       router.push(callBack);
+    } else {
+      Swal.fire("Error", "Invalid credentials", "error");
     }
   };
 
