@@ -36,3 +36,24 @@ export const bookingDelete = async (id) => {
   return data;
 };
 
+
+
+export const updateBookingStatus = async (id, status) => {
+  const res = await fetch(`http://localhost:3000/api/booking?id=${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status }),
+    cache: "no-store",
+  });
+  return res.json();
+};
+
+
+export const getAllBookings = async () => {
+  const res = await fetch(`http://localhost:3000/api/booking`, {
+    cache: "no-store",
+  });
+  return res.json();
+};

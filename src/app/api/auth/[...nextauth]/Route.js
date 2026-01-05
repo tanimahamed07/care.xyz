@@ -13,8 +13,8 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {},
-        password: {},
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         const userCollection = await dbConnect("users");
@@ -34,9 +34,10 @@ export const authOptions = {
 
         return {
           id: user._id.toString(),
-          name: user.name,
+          fullName: user.name,
           email: user.email,
           role: user.role,
+          image: user.image || null,
         };
       },
     }),
@@ -59,12 +60,13 @@ export const authOptions = {
         if (!existingUser) {
           await userCollection.insertOne({
             provider: "google",
-            name: user.name,
+            fullName: user.name,
             email: user.email,
             image: user.image,
             role: "user",
             nidNumber: "Not Provided",
             contact: "Not Provided",
+            createdAt: new Date(),
           });
 
           user.role = "user";
@@ -76,18 +78,36 @@ export const authOptions = {
     },
 
     async jwt({ token, user }) {
-      if (user?.role) {
+      if (user) {
         token.role = user.role;
+        token.email = user.email;
+        return token;
       }
+
+      const userCollection = await dbConnect("users");
+      const dbUser = await userCollection.findOne({
+        email: token.email,
+      });
+
+      if (dbUser) {
+        token.role = dbUser.role;
+      }
+
       return token;
     },
 
     async session({ session, token }) {
-      session.user.role = token.role;
+      session.user.role = token.role || "user";
       return session;
     },
   },
+
+  pages: {
+    signIn: "/login",
+  },
+
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
-const handle = NextAuth(authOptions);
-export { handle as GET, handle as POST };
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

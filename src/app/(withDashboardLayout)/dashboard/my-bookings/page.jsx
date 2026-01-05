@@ -104,11 +104,9 @@ const MyBookingsPage = () => {
 
       {/* Bookings Table / Card View */}
       <div className="overflow-x-auto bg-base-100 rounded-3xl border border-base-200 shadow-sm">
-        <div className="overflow-x-auto w-full">
-          {" "}
-          {/* Parent wrapper for responsiveness */}
-          <table className="table table-zebra w-full border-collapse">
-            {/* Table Head */}
+        <div className="overflow-x-auto">
+          {/* Desktop Version */}
+          <table className="table table-zebra w-full border-collapse hidden md:table">
             <thead className="bg-base-200/50">
               <tr className="text-neutral font-bold text-sm uppercase tracking-wider border-b border-base-200">
                 <th className="py-5 whitespace-nowrap">Service Details</th>
@@ -119,7 +117,6 @@ const MyBookingsPage = () => {
                 <th className="text-right whitespace-nowrap">Action</th>
               </tr>
             </thead>
-
             <tbody>
               {bookings.map((booking) => (
                 <tr
@@ -147,7 +144,6 @@ const MyBookingsPage = () => {
                       </div>
                     </div>
                   </td>
-
                   <td className="whitespace-nowrap">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2 text-sm font-semibold text-neutral/80">
@@ -160,9 +156,7 @@ const MyBookingsPage = () => {
                       </div>
                     </div>
                   </td>
-
                   <td>
-                    {/* Location section should have some width but not wrap too early */}
                     <div className="flex items-start gap-2 min-w-[180px]">
                       <FaMapMarkerAlt className="text-error mt-1 text-xs shrink-0" />
                       <div>
@@ -175,34 +169,90 @@ const MyBookingsPage = () => {
                       </div>
                     </div>
                   </td>
-
-                  <td className="text-center">
-                    <div className="flex items-center justify-center gap-1 font-black text-lg text-primary whitespace-nowrap">
-                      <span className="text-xs font-bold text-neutral/40">
-                        BDT
-                      </span>
-                      {booking.totalCost}
-                    </div>
+                  <td className="text-center font-black text-lg text-primary">
+                    <span className="text-xs font-bold text-neutral/40 mr-1">
+                      BDT
+                    </span>
+                    {booking.totalCost}
                   </td>
-
                   <td className="text-center">
-                    <div className="flex justify-center">
-                      {getStatusBadge(booking.status)}
-                    </div>
+                    {getStatusBadge(booking.status)}
                   </td>
-
-                  <th className="text-right whitespace-nowrap">
+                  <th className="text-right">
                     <button
                       onClick={() => handleDelete(booking._id)}
-                      className="text-error font-bold hover:underline transition-all"
+                      className="text-error font-bold hover:underline"
                     >
-                      Cancel Booking
+                      Cancel
                     </button>
                   </th>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          {/* Mobile Version (Card Layout) */}
+          <div className="grid grid-cols-1 gap-4 md:hidden">
+            {bookings.map((booking) => (
+              <div
+                key={booking._id}
+                className="bg-base-100 p-4 rounded-2xl border border-base-200 shadow-sm space-y-3"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0">
+                    <Image
+                      src={booking?.image || "/placeholder.jpg"}
+                      alt="img"
+                      width={56}
+                      height={56}
+                      className="object-cover h-full"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-black text-neutral leading-tight">
+                      {booking.serviceName}
+                    </h3>
+                    <p className="text-[10px] text-neutral/40">
+                      ID: #{booking._id.slice(-6)}
+                    </p>
+                    <div className="mt-1">{getStatusBadge(booking.status)}</div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 py-2 border-y border-base-100">
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-neutral/30">
+                      Date & Time
+                    </p>
+                    <p className="text-xs font-bold text-neutral/80 flex items-center gap-1 mt-1">
+                      <FaCalendarAlt className="text-primary" />{" "}
+                      {booking.bookingDate}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-neutral/30">
+                      Price
+                    </p>
+                    <p className="text-sm font-black text-primary mt-1">
+                      {booking.totalCost} BDT
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-1 text-[11px] text-neutral/60">
+                    <FaMapMarkerAlt className="text-error" /> {booking.area}
+                  </div>
+                  <button
+                    onClick={() => handleDelete(booking._id)}
+                    className="btn btn-ghost btn-xs text-error font-bold"
+                  >
+                    Cancel Booking
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         {/* Empty State (Optional) */}
         {bookings.length === 0 && (

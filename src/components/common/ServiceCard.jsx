@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ServiceCard = ({ service }) => {
-  console.log(service?.image);
   return (
     <div className="group bg-base-100 border border-base-300 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
       <div className="relative aspect-[4/3] overflow-hidden bg-base-200">
@@ -15,6 +14,17 @@ const ServiceCard = ({ service }) => {
           alt={service.name}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
+
+        {/* 🔥 Popular Badge (only if populer === true) */}
+        {service.populer && (
+          <div className="absolute top-3 left-3 z-10">
+            <span className="bg-gradient-to-r from-primary to-accent text-white text-[10px] font-black px-3 py-1 rounded-full shadow-lg tracking-widest uppercase">
+              Popular
+            </span>
+          </div>
+        )}
+
+        {/* Category Badge */}
         <div className="absolute top-3 right-3">
           <span className="text-[10px] font-bold bg-white/90 backdrop-blur-sm text-primary px-3 py-1 rounded-lg uppercase shadow-sm">
             {service.category}
@@ -26,6 +36,7 @@ const ServiceCard = ({ service }) => {
         <h3 className="text-xl font-bold text-neutral group-hover:text-primary transition-colors truncate">
           {service.name}
         </h3>
+
         <p className="text-sm text-neutral/50 line-clamp-2 mt-2 h-10 leading-relaxed">
           {service.shortDescription}
         </p>
@@ -42,6 +53,7 @@ const ServiceCard = ({ service }) => {
               Hourly
             </span>
           </div>
+
           <div className="flex flex-col border-l border-base-200 pl-4">
             <div className="flex items-center gap-1.5 text-accent">
               <FaCalendarDay className="text-xs" />

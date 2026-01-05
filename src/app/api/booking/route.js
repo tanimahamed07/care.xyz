@@ -20,18 +20,23 @@ export async function POST(request) {
   }
 }
 
-export async function GET(request, { query }) {
+export async function GET(request) {
   const { searchParams } = new URL(request.url);
-
   const email = searchParams.get("email");
 
-  console.log(email);
   try {
-    const result = await collection.find({ email: email }).toArray();
-
+    const collection = await dbConnect("bookings");
+    let query = {};
+    if (email && email !== "undefined") {
+      query = { email: email };
+    }
+    const result = await collection
+      .find(query)
+      .sort({ createdAt: -1 })
+      .toArray();
     return Response.json(result);
   } catch (error) {
-    return Response.json({ error });
+    return Response.json(error);
   }
 }
 export async function DELETE(request) {
@@ -45,5 +50,24 @@ export async function DELETE(request) {
     return Response.json(result);
   } catch (error) {
     return Response.json(error);
+  }
+}
+
+export async function PATCH(request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+
+  try {
+    const body = await request.json();
+    const collection = await dbConnect("bookings");
+
+    const result = await collection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { status: body.status } }
+    );
+
+    return Response.json(result);
+  } catch (error) {
+    return Response.json({ error: "Update failed" }, { status: 500 });
   }
 }

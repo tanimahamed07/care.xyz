@@ -7,10 +7,9 @@ import {
   FaClock,
   FaMoneyCheckAlt,
   FaUser,
-  FaCalendarAlt,
 } from "react-icons/fa";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { getServiceById } from "@/services/services.details";
 import { booking } from "@/services/services.bookings";
 import Swal from "sweetalert2";
@@ -20,6 +19,10 @@ const BookingPage = ({ params }) => {
   const [service, setService] = useState();
   const { id } = useParams();
   const { data: session } = useSession();
+  const router = useRouter();
+
+  // Check if the user is an admin
+  const isAdmin = session?.user?.role === "admin";
 
   useEffect(() => {
     getServiceById(id).then((service) => setService(service));
@@ -49,7 +52,7 @@ const BookingPage = ({ params }) => {
     fetch("/warehouses.json")
       .then((res) => res.json())
       .then((data) => {
-        setLocationData(Array.isArray(data) ? data : []);
+        setLocationData(data);
       })
       .catch((err) => console.error("Location fetch error ❌", err));
   }, []);
@@ -71,12 +74,28 @@ const BookingPage = ({ params }) => {
       : dailyPrice * (watchedDuration || 0);
 
   const onSubmit = (data) => {
-    const formData = { ...data, totalCost, serviceName: service?.name, email: session?.user?.email, image: service?.image };
-    console.log("Final Booking Data:", formData);
+    // Extra safety: Prevent submission even if button is enabled via Inspect Element
+    if (isAdmin) {
+      Swal.fire({
+        icon: "error",
+        title: "Unauthorized",
+        text: "Admins are not allowed to place bookings.",
+      });
+      return;
+    }
+
+    const formData = {
+      ...data,
+      totalCost,
+      serviceName: service?.name,
+      email: session?.user?.email,
+      image: service?.image,
+    };
 
     booking(formData)
       .then((res) => {
         if (res.acknowledged === true) {
+          router.push("/dashboard/my-bookings");
           Swal.fire({
             icon: "success",
             title: "Booking Submitted!",
@@ -103,6 +122,11 @@ const BookingPage = ({ params }) => {
           <h1 className="text-3xl md:text-4xl font-extrabold text-neutral">
             Book <span className="text-primary">{service?.name}</span>
           </h1>
+          {isAdmin && (
+            <p className="text-error font-semibold mt-2">
+              Note: Admin accounts cannot place service bookings.
+            </p>
+          )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -111,7 +135,7 @@ const BookingPage = ({ params }) => {
               onSubmit={handleSubmit(onSubmit)}
               className="bg-base-100 p-8 rounded-[2.5rem] shadow-xl border border-base-300"
             >
-              {/* Personal Details Section */}
+              {/* Personal Details */}
               <div className="mb-8">
                 <div className="flex items-center gap-2 mb-6 text-primary font-bold">
                   <FaUser /> <span>Personal Information</span>
@@ -127,6 +151,7 @@ const BookingPage = ({ params }) => {
                       placeholder="Enter your name"
                       className="input input-bordered rounded-xl bg-base-200 border-none"
                       required
+                      disabled={isAdmin}
                     />
                   </div>
                   <div className="form-control">
@@ -138,6 +163,7 @@ const BookingPage = ({ params }) => {
                       {...register("bookingDate")}
                       className="input input-bordered rounded-xl bg-base-200 border-none"
                       required
+                      disabled={isAdmin}
                     />
                   </div>
                 </div>
@@ -156,6 +182,7 @@ const BookingPage = ({ params }) => {
                     <select
                       {...register("planType")}
                       className="select select-bordered rounded-xl bg-base-200 border-none"
+                      disabled={isAdmin}
                     >
                       <option value="hourly">Hourly Basis</option>
                       <option value="daily">Daily Basis</option>
@@ -173,6 +200,7 @@ const BookingPage = ({ params }) => {
                       {...register("duration")}
                       className="input input-bordered rounded-xl bg-base-200 border-none"
                       required
+                      disabled={isAdmin}
                     />
                   </div>
                 </div>
@@ -184,57 +212,53 @@ const BookingPage = ({ params }) => {
                   <FaMapMarkerAlt /> <span>Service Location</span>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="form-control">
-                    <select
-                      {...register("region")}
-                      className="select select-bordered rounded-xl bg-base-200 border-none"
-                      required
-                    >
-                      <option value="">Select Division</option>
-                      {uniqueRegions.map((r) => (
-                        <option key={r} value={r}>
-                          {r}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <select
+                    {...register("region")}
+                    className="select select-bordered rounded-xl bg-base-200 border-none"
+                    required
+                    disabled={isAdmin}
+                  >
+                    <option value="">Select Division</option>
+                    {uniqueRegions.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </select>
 
-                  <div className="form-control">
-                    <select
-                      {...register("district")}
-                      className="select select-bordered rounded-xl bg-base-200 border-none"
-                      disabled={!watchedRegion}
-                      required
-                    >
-                      <option value="">Select District</option>
-                      {districts.map((d) => (
-                        <option key={d.district} value={d.district}>
-                          {d.district}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <select
+                    {...register("district")}
+                    className="select select-bordered rounded-xl bg-base-200 border-none"
+                    disabled={!watchedRegion || isAdmin}
+                    required
+                  >
+                    <option value="">Select District</option>
+                    {districts.map((d) => (
+                      <option key={d.district} value={d.district}>
+                        {d.district}
+                      </option>
+                    ))}
+                  </select>
 
-                  <div className="form-control">
-                    <select
-                      {...register("area")}
-                      className="select select-bordered rounded-xl bg-base-200 border-none"
-                      disabled={!watchedDistrict}
-                      required
-                    >
-                      <option value="">Select Area</option>
-                      {areas.map((a) => (
-                        <option key={a} value={a}>
-                          {a}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <select
+                    {...register("area")}
+                    className="select select-bordered rounded-xl bg-base-200 border-none"
+                    disabled={!watchedDistrict || isAdmin}
+                    required
+                  >
+                    <option value="">Select Area</option>
+                    {areas.map((a) => (
+                      <option key={a} value={a}>
+                        {a}
+                      </option>
+                    ))}
+                  </select>
 
                   <input
                     {...register("zip")}
                     placeholder="Zip Code"
                     className="input input-bordered rounded-xl bg-base-200 border-none"
+                    disabled={isAdmin}
                   />
 
                   <textarea
@@ -243,15 +267,22 @@ const BookingPage = ({ params }) => {
                     placeholder="House no, Flat, Street details..."
                     rows="2"
                     required
+                    disabled={isAdmin}
                   ></textarea>
                 </div>
               </div>
 
+              {/* Logic for the Button */}
               <button
                 type="submit"
-                className="btn btn-primary btn-lg w-full rounded-2xl text-white font-bold transition-transform hover:scale-[1.02]"
+                disabled={isAdmin}
+                className={`btn btn-lg w-full rounded-2xl text-white font-bold transition-transform ${
+                  isAdmin
+                    ? "btn-disabled bg-gray-400 cursor-not-allowed"
+                    : "btn-primary hover:scale-[1.02]"
+                }`}
               >
-                Confirm Booking
+                {isAdmin ? "Admin Booking Not Allowed" : "Confirm Booking"}
               </button>
             </form>
           </div>

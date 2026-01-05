@@ -1,13 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  FaUser,
-  FaEnvelope,
-  FaLock,
-  FaIdCard,
-  FaPhone,
-} from "react-icons/fa";
+import { FaUser, FaEnvelope, FaLock, FaIdCard, FaPhone } from "react-icons/fa";
 import Container from "@/components/common/Container";
 import { signup } from "@/services/users.service";
 import GoogleButton from "@/components/auth/GoogleButton";
@@ -49,6 +43,7 @@ const RegisterPage = () => {
       contact,
       password,
       role: "user",
+      createdAt: new Date(),
     };
 
     try {

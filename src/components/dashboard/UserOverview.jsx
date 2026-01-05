@@ -11,8 +11,8 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 
-const Dashboard = () => {
-  const { session } = useSession();
+const UserOverview = () => {
+
   const stats = [
     {
       id: 1,
@@ -201,4 +201,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default UserOverview;

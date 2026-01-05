@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Container from "./Container";
 import NavLink from "../home/NavLink";
 import { signOut, useSession } from "next-auth/react";
+import { FaUser } from "react-icons/fa";
 // import { signIn } from "next-auth/react";
 
 const Navbar = () => {
@@ -52,8 +53,8 @@ const Navbar = () => {
               <NavLink href="/services" className={linkClass("/services")}>
                 Services
               </NavLink>
-              <NavLink href="/booking" className={linkClass("/booking")}>
-                My Bookings
+              <NavLink href="/about-us" className={linkClass("/booking")}>
+                About Us
               </NavLink>
             </nav>
 
@@ -65,13 +66,20 @@ const Navbar = () => {
                   tabIndex={0}
                   className="btn btn-ghost btn-circle avatar border-2 border-transparent hover:border-primary/30 transition-all p-0.5"
                 >
-                  <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <Image
-                      width={40}
-                      height={40}
-                      src={session?.user?.image || "https://i.pravatar.cc/40"}
-                      alt="profile"
-                    />
+                  <div className="w-40 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden bg-base-200">
+                    {session?.user?.image ? (
+                      <Image
+                        src={session.user.image}
+                        alt="profile"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <FaUser className="w-6 h-6 text-base-content/60" />
+                      </div>
+                    )}
                   </div>
                 </label>
                 <ul
