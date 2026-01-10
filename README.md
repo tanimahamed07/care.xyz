@@ -1,1 +1,99 @@
-🏥 Care.xyz – Baby Sitting & Elderly Care Service PlatformCare.xyz (or Care.IO) is a comprehensive web application designed to provide reliable and trusted care services for children, the elderly, and ill family members. The platform simplifies the process of finding and hiring professional caretakers for various household needs.🌐 Live Demo Link | Client Repo📖 Table of ContentsProject OverviewKey FeaturesTech StackPages & RoutesChallenges & SolutionsInstallation & Setup📝 Project OverviewCare.xyz helps users book reliable care services based on their specific needs, location, and preferred duration. The main goal is to make professional caregiving easy, secure, and accessible for families.Core Mission: Ensuring safety and comfort for your loved ones through a trusted digital platform.✨ Key Features📱 Fully Responsive: Seamlessly works on Mobile, Tablet, and Desktop.🔐 Secure Authentication: Integrated Email/Password registration and Google Social Login via Firebase.📅 Dynamic Booking: Real-time booking system where users select Duration and Location (Division, District, City, Area).💰 Auto-Cost Calculation: Dynamically calculates the total price based on Duration × Service Charge.📑 My Bookings Tracker: A dedicated dashboard for users to monitor their booking status (Pending, Confirmed, Completed, or Cancelled).🛡️ Private Routes: Ensures secure access to booking and profile pages (prevents logout on page refresh).📧 Email Invoice: Automatically sends a professional email invoice to the user once a service is booked.🔍 Metadata & SEO: Optimized SEO with dynamic page titles for the Home and Service Detail pages.💻 Tech StackLayerTechnologies UsedFrontendReact.js, Tailwind CSS, Framer Motion, Axios, React Router v6BackendNode.js, Express.js, MongoDB, MongooseAuth & SecurityFirebase Authentication, JWT (JSON Web Token)DeploymentVercel (Frontend), Render/Railway (Backend)InvoicingEmailJS / Nodemailer🛤️ Pages & RoutesHomepage (/): Motivational banner, Mission statement (About), Service categories, and Testimonials.Service Details (/service/:service_id): Detailed description of the selected service and a "Book Service" action.Booking Page (/booking/:service_id): (Private) Multi-step form for duration, location, and dynamic cost display.Authentication:Login: Email and Password.Registration: Includes NID, Contact, and strict password validation (6+ chars, 1 Upper, 1 Lower).My Bookings (/my-bookings): (Private) List of user bookings with details and "Cancel" option.Error Page (404): Custom "Not Found" message with a redirect to Home.
+# 🏥 Care.xyz – Baby Sitting & Elderly Care Service Platform
+
+**Care.xyz** (or Care.IO) is a robust and user-friendly web application designed to provide reliable and trusted care services for children, the elderly, and ill family members. The platform bridges the gap between professional caregivers and families in need.
+
+## 🌐 [Live Demo Link](https://your-live-link.com) | [Client Repo](https://github.com/tanimahamed07/care-xyz-client)
+
+---
+
+## 📖 Table of Contents
+* [Project Overview](#project-overview)
+* [Key Features](#key-features)
+* [Tech Stack](#tech-stack)
+* [Pages & Routes](#pages--routes)
+* [Challenges & Solutions](#challenges--solutions)
+* [Installation & Setup](#installation--setup)
+
+---
+
+## 📝 Project Overview
+Care.xyz helps users find and hire caretakers for different purposes such as babysitting, elderly care, or special medical care at home. Users can easily book services through the platform based on their location and duration.
+
+**Our Goal:** To make caregiving easy, secure, and accessible for everyone.
+
+
+
+---
+
+## ✨ Key Features
+
+* **📱 Responsive Design:** Fully optimized for Mobile, Tablet, and Desktop screens.
+* **🔐 Secure Authentication:** Supports Email/Password login and Google Social Login.
+* **📅 Dynamic Booking:** Users can select duration (days/hours) and detailed location (Division, District, City, Area).
+* **💰 Automatic Cost Calculation:** Costs are calculated dynamically based on `duration × service charge`.
+* **📑 My Bookings Dashboard:** Users can track their booking status: **Pending, Confirmed, Completed, or Cancelled**.
+* **🛡️ Private Route Persistence:** Logged-in users are not redirected to the login page on page reloads.
+* **📧 Email Invoicing:** Sends an automated email invoice to the user immediately after booking.
+* **🔍 Metadata & SEO:** Dynamic page titles for the Homepage and Service Detail pages for better SEO.
+
+---
+
+## 💻 Tech Stack
+
+| Layer | Technologies Used |
+| :--- | :--- |
+| **Frontend** | React.js, Tailwind CSS, Framer Motion, Axios, React Router v6 |
+| **Backend** | Node.js, Express.js, MongoDB, Mongoose |
+| **Auth** | Firebase Authentication, JWT (JSON Web Token) |
+| **Deployment** | Vercel (Frontend), Render (Backend) |
+| **Utilities** | React Helmet Async, EmailJS / Nodemailer |
+
+---
+
+## 🛤️ Pages & Routes
+
+1.  **Homepage (`/`):** Motivational banner/slider, About section, and an overview of services.
+2.  **Service Details (`/service/:service_id`):** Deep dive into specific service info with a "Book Service" button.
+3.  **Booking Page (`/booking/:service_id`):** (Private Route) Step-by-step booking process with live cost calculation.
+4.  **Authentication:**
+    * **Login Page:** Email and Password access.
+    * **Registration:** Form includes NID No, Name, Contact, and strict Password validation (6+ chars, 1 Upper, 1 Lower).
+5.  **My Bookings (`/my-bookings`):** (Private Route) Table view of all bookings with status and action buttons.
+6.  **Error Page (404):** A custom page for invalid routes with a return-to-home button.
+
+---
+
+## ⚙️ Installation & Setup
+
+1.  **Clone the Repository:**
+    ```bash
+    git clone [https://github.com/tanimahamed07/care-xyz-client.git](https://github.com/tanimahamed07/care-xyz-client.git)
+    ```
+
+2.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Setup Environment Variables:**
+    Create a `.env.local` file in the root and add:
+    ```env
+    VITE_apiKey=your_firebase_key
+    VITE_authDomain=your_auth_domain
+    VITE_projectId=your_project_id
+    VITE_storageBucket=your_storage_bucket
+    VITE_messagingSenderId=your_sender_id
+    VITE_appId=your_app_id
+    ```
+
+4.  **Run Development Server:**
+    ```bash
+    npm run dev
+    ```
+
+---
+
+### 👨‍💻 Contributor
+**Tanim Ahammed** [GitHub Profile](https://github.com/tanimahamed07) | [Your Portfolio](https://your-portfolio.com)
+
+---
