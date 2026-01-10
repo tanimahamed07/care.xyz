@@ -30,8 +30,8 @@ const ServicesOverviewSkeleton = () => {
         </div>
 
         {/* Cards Grid Skeleton */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {[...Array(6)].map((_, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          {[...Array(4)].map((_, index) => (
             <div
               key={index}
               className="rounded-2xl border border-gray-100 p-6 space-y-6 bg-white" // ServiceCard-এর সাথে মিল রাখতে p-6 এবং bg-white ধরে নিচ্ছি

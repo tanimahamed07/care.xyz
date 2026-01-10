@@ -1,25 +1,22 @@
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import React from "react";
-import Swal from "sweetalert2";
+import { useRouter, useSearchParams } from "next/navigation";
+
+import React, { Suspense } from "react";
 
 const GoogleButton = () => {
   const params = useSearchParams();
-
-  const handleSingIn = async () => {
-    const result = await signIn("google", {
-      redirect: "false",
-      callbackUrl: params.get("callbackUrl") || "/",
+  const router = useRouter();
+  const callbackUrl = params.get("callbackUrl") || "/";
+  console.log(callbackUrl);
+  const handleSignIn = () => {
+    signIn("google", {
+      callbackUrl: callbackUrl,
     });
-    if (result.ok) {
-      Swal.fire("success", "Welcome", "success");
-    } else {
-      Swal.fire("Err", "Sorry", "error");
-    }
   };
+
   return (
     <button
-      onClick={handleSingIn}
+      onClick={handleSignIn}
       className="btn btn-outline border-base-300 w-full rounded-xl flex items-center gap-3 hover:bg-neutral hover:text-white h-14 transition-all"
     >
       <svg className="w-5 h-5 mr-2" viewBox="0 0 48 48">

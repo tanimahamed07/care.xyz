@@ -8,7 +8,6 @@ import {
   FaHome,
   FaCalendarCheck,
   FaUserCircle,
-  FaCog,
   FaSignOutAlt,
   FaBars,
   FaBell,
@@ -22,10 +21,10 @@ import Image from "next/image";
 const DashboardLayout = ({ children }) => {
   const pathname = usePathname();
   const { data: session } = useSession();
-  console.log(session?.user?.role);
+  // console.log(session?.user?.role);
 
   const isAdmin = session?.user?.role === "admin";
-  console.log(isAdmin);
+  // console.log(isAdmin);
 
   const userMenuItems = [
     {

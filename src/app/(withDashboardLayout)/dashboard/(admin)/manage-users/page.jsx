@@ -8,12 +8,10 @@ import {
   FaIdCard,
   FaEnvelope,
   FaPhoneAlt,
-  FaSyncAlt,
 } from "react-icons/fa";
 
 const ManageUsersPage = () => {
   const [users, setUsers] = useState([]);
-  console.log(users);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

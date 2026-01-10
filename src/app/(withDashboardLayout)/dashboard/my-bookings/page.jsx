@@ -15,12 +15,12 @@ import {
 } from "react-icons/fa";
 
 const MyBookingsPage = () => {
-  const [bookings, setBookings] = useState([]); // start with empty array
+  const [bookings, setBookings] = useState([]);
 
   const { data: session } = useSession();
   console.log("============>", session?.user?.email);
   useEffect(() => {
-    if (!session?.user?.email) return; // wait for session to load
+    if (!session?.user?.email) return;
 
     const fetchBooking = async () => {
       const data = await getBookingById(session.user.email);
@@ -29,7 +29,7 @@ const MyBookingsPage = () => {
 
     fetchBooking();
   }, [session?.user?.email]);
-  console.log(bookings);
+  // console.log(bookings);
 
   const handleDelete = async (id) => {
     try {
@@ -170,9 +170,6 @@ const MyBookingsPage = () => {
                     </div>
                   </td>
                   <td className="text-center font-black text-lg text-primary">
-                    <span className="text-xs font-bold text-neutral/40 mr-1">
-                      BDT
-                    </span>
                     {booking.totalCost}
                   </td>
                   <td className="text-center">

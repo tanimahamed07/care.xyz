@@ -12,7 +12,7 @@ import { FaUser } from "react-icons/fa";
 const Navbar = () => {
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  console.log("------------->", session, status);
+  // console.log("------------->", session, status);
 
   // const user = {
   //   email: "user@email.com",

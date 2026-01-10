@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Container from "../common/Container";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -24,30 +25,29 @@ const Banner = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-              <a
+              <Link
                 href="/services"
                 className="px-8 py-4 bg-primary text-primary-content rounded-xl font-bold text-lg shadow-md transition hover:shadow-xl hover:scale-105"
               >
                 Book a Service
-              </a>
-
-              <a
-                href="#about"
+              </Link>
+              <Link
+                href="/about-us"
                 className="px-8 py-4 border-2 border-primary text-primary rounded-xl font-bold text-lg transition hover:bg-primary hover:text-primary-content"
               >
                 Learn More
-              </a>
+              </Link>
             </div>
           </div>
-
           {/* Image Section */}
-          <div className="md:w-1/2 flex justify-center">
-            <div className="relative w-full h-80 md:h-96 lg:h-[28rem]">
+          <div className="w-full md:w-1/2 relative flex justify-center">
+            <div className="w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] relative">
               <Image
                 src="https://healthcaresnapshots.com/wp-content/uploads/sites/5/2019/09/southington-care-center-reception-area-and-nurses-station-renovations-6-1050x750.jpg"
                 alt="Caregiving Illustration"
                 fill
                 className="object-cover rounded-2xl shadow-lg"
+                priority // ব্যানার ইমেজের জন্য priority ব্যবহার করা ভালো
               />
             </div>
           </div>

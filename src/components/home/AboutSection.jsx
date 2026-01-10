@@ -1,6 +1,7 @@
 import React from "react";
 import { FaShieldAlt, FaHandHoldingHeart, FaUserCheck } from "react-icons/fa";
 import Container from "../common/Container";
+import Link from "next/link";
 
 const AboutSection = () => {
   return (
@@ -100,9 +101,9 @@ const AboutSection = () => {
               </div>
 
               <div className="pt-6">
-                <button className="btn btn-primary w-full sm:w-auto btn-lg rounded-2xl px-10 shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+                <Link href="/services" className="btn btn-primary w-full sm:w-auto btn-lg rounded-2xl px-10 shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
                   Explore Services
-                </button>
+                </Link>
               </div>
             </div>
           </div>

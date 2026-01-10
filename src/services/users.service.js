@@ -2,7 +2,7 @@
 
 export const signup = async (userData) => {
   try {
-    const res = await fetch("http://localhost:3000/api/user", {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const signup = async (userData) => {
 
 export const getAllUsers = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/user", {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user`, {
       method: "GET",
       cache: "no-store",
     });
@@ -43,7 +43,7 @@ export const getAllUsers = async () => {
 
 // export const updateUserRole = async (id, newRole) => {
 //   try {
-//     const res = await fetch(`http://localhost:3000/api/user?id=${id}`, {
+//     const res = await fetch(`process.env.NEXTAUTH_URL/api/user?id=${id}`, {
 //       method: "PATCH",
 //       headers: { "Content-Type": "application/json" },
 //       body: JSON.stringify({ role: newRole }),
@@ -64,7 +64,7 @@ export const getAllUsers = async () => {
 // };
 
 export const updateUserRole = async (id, role) => {
-  const res = await fetch(`http://localhost:3000/api/user?id=${id}`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user?id=${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

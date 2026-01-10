@@ -1,17 +1,16 @@
 import { dbConnect } from "@/lib/dbConnect";
 
-const collection = await dbConnect("services");
 export async function GET() {
   try {
+    const collection = await dbConnect("services");
     const services = await collection.find().toArray();
+
     return Response.json({ services });
   } catch (error) {
-    console.error(error);
+    console.error("Database Error:", error);
     return Response.json(
       { message: "Failed to fetch services" },
       { status: 500 }
     );
   }
 }
-
-

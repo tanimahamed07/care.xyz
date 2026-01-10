@@ -1,7 +1,7 @@
 "use server";
 
 export const booking = async (bookingData) => {
-  const res = await fetch("http://localhost:3000/api/booking", {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/booking`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,17 +18,20 @@ export const booking = async (bookingData) => {
 };
 
 export const getBookingById = async (email) => {
-  const res = await fetch(`http://localhost:3000/api/booking?email=${email}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/booking?email=${email}`,
+    {
+      cache: "no-store",
+    }
+  );
 
   const data = await res.json();
   return data;
 };
 
 export const bookingDelete = async (id) => {
-  const res = await fetch(`http://localhost:3000/api/booking?id=${id}`, {
-    method: "DELETE", 
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/booking?id=${id}`, {
+    method: "DELETE",
     cache: "no-store",
   });
 
@@ -36,10 +39,8 @@ export const bookingDelete = async (id) => {
   return data;
 };
 
-
-
 export const updateBookingStatus = async (id, status) => {
-  const res = await fetch(`http://localhost:3000/api/booking?id=${id}`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/booking?id=${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -50,9 +51,8 @@ export const updateBookingStatus = async (id, status) => {
   return res.json();
 };
 
-
 export const getAllBookings = async () => {
-  const res = await fetch(`http://localhost:3000/api/booking`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/booking`, {
     cache: "no-store",
   });
   return res.json();

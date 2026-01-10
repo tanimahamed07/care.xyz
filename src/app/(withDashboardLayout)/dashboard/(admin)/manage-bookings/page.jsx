@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { FaCalendarAlt, FaMapMarkerAlt, FaUser } from "react-icons/fa";
+import { FaCalendarAlt, FaMapMarkerAlt, FaTag, FaUser } from "react-icons/fa";
 import {
   getAllBookings,
   updateBookingStatus,

@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import CountUp from "react-countup"; 
-import { useInView } from "react-intersection-observer"; 
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
 const SuccessMetrics = () => {
   const { ref, inView } = useInView({
-    triggerOnce: true, 
-    threshold: 0.2, 
+    triggerOnce: true,
+    threshold: 0.2,
   });
 
   return (

@@ -1,7 +1,7 @@
 import { dbConnect } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 
-export async function GET(request, { params, query }) {
+export async function GET(request, { params }) {
 
   const { searchParams } = new URL(request.url);
 

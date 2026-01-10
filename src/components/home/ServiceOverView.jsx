@@ -8,7 +8,7 @@ import { getPoulerServices } from "@/services/services.home";
 
 const ServicesOverview = async () => {
   const services = await getPoulerServices();
-  console.log(services)
+  // console.log(services)
 
 
   if (!services || services.length === 0) {

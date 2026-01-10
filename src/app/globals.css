@@ -7,7 +7,7 @@
   name: "light";
   default: true;
   /* Brand */
- --color-primary: oklch(60% 0.18 200); /* soft lavender-blue */
+  --color-primary: oklch(60% 0.18 200); /* soft lavender-blue */
   --color-secondary: oklch(68% 0.25 20); /* deep coral-red */
   --color-accent: oklch(70% 0.22 90);
 
@@ -25,4 +25,8 @@
   --color-error: oklch(64% 0.28 25); /* strong reddish pink */
   --color-warning: oklch(75% 0.18 70); /* golden yellow */
   --color-info: oklch(65% 0.15 230); /* soft sky blue */
+}
+
+.testimonial-swiper .swiper-wrapper {
+  height: 300px !important;
 }

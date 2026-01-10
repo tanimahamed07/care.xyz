@@ -17,7 +17,7 @@ const AboutPage = () => {
     <section className="bg-base-100">
       <Container>
         {/* Hero */}
-        <div className="py-16 text-center max-w-3xl mx-auto">
+        <div className="py-16 text-center mx-auto">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-bold uppercase tracking-wider mb-6">
             About Care.xyz
           </span>
