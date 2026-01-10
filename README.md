@@ -6,16 +6,6 @@
 
 ---
 
-## 📖 Table of Contents
-* [Project Overview](#project-overview)
-* [Key Features](#key-features)
-* [Tech Stack](#tech-stack)
-* [Pages & Routes](#pages--routes)
-* [Challenges & Solutions](#challenges--solutions)
-* [Installation & Setup](#installation--setup)
-
----
-
 ## 📝 Project Overview
 Care.xyz helps users find and hire caretakers for different purposes such as babysitting, elderly care, or special medical care at home. Users can easily book services through the platform based on their location and duration.
 
