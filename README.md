@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://via.placeholder.com/1200x400/10b981/ffffff?text=Care.xyz+-+Trusted+Care+Services" alt="Care.xyz Banner"/>
+  <img src="https://i.ibb.co.com/twR8PmSG/Screenshot-2026-01-17-at-11-44-34-AM.png" alt="Care.xyz Banner"/>
   <br><br>
   <a href="https://your-live-link.com">
     <img src="https://img.shields.io/badge/Live%20Demo-10b981?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
   </a>
-  <a href="https://github.com/tanimahamed07/care-xyz-client">
+  <a href="https://care-xyz-blush.vercel.app/">
     <img src="https://img.shields.io/github/stars/tanimahamed07/care-xyz-client?style=for-the-badge&color=10b981" alt="GitHub Stars">
   </a>
 </p>
@@ -67,14 +67,5 @@ cd care-xyz-client
 # 2. Install dependencies
 npm install
 
-# 3. Create .env.local file and add your Firebase config
-# Example:
-VITE_apiKey=your_api_key
-VITE_authDomain=your_project.firebaseapp.com
-VITE_projectId=your_project_id
-VITE_storageBucket=your_project.appspot.com
-VITE_messagingSenderId=your_sender_id
-VITE_appId=your_app_id
-
-# 4. Start development server
+# 3. Start development server
 npm run dev
