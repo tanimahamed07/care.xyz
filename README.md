@@ -1,89 +1,80 @@
-# 🏥 Care.xyz – Baby Sitting & Elderly Care Service Platform
+<p align="center">
+  <img src="https://via.placeholder.com/1200x400/10b981/ffffff?text=Care.xyz+-+Trusted+Care+Services" alt="Care.xyz Banner"/>
+  <br><br>
+  <a href="https://your-live-link.com">
+    <img src="https://img.shields.io/badge/Live%20Demo-10b981?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
+  </a>
+  <a href="https://github.com/tanimahamed07/care-xyz-client">
+    <img src="https://img.shields.io/github/stars/tanimahamed07/care-xyz-client?style=for-the-badge&color=10b981" alt="GitHub Stars">
+  </a>
+</p>
 
-**Care.xyz** (or Care.IO) is a robust and user-friendly web application designed to provide reliable and trusted care services for children, the elderly, and ill family members. The platform bridges the gap between professional caregivers and families in need.
+<h1 align="center">🏥 Care.xyz – Baby Sitting & Elderly Care Platform</h1>
 
-## 🌐 [Live Demo Link](https://your-live-link.com) | [Client Repo](https://github.com/tanimahamed07/care-xyz-client)
+<p align="center">
+  A modern, secure, and user-friendly platform connecting families with trusted professional caregivers for <strong>babies</strong>, <strong>elderly</strong>, and <strong>special care needs</strong>.<br>
+  Making caregiving accessible, reliable, and stress-free.
+</p>
 
----
-
-## 📝 Project Overview
-Care.xyz helps users find and hire caretakers for different purposes such as babysitting, elderly care, or special medical care at home. Users can easily book services through the platform based on their location and duration.
-
-**Our Goal:** To make caregiving easy, secure, and accessible for everyone.
-
-
-
----
+<hr>
 
 ## ✨ Key Features
 
-* **📱 Responsive Design:** Fully optimized for Mobile, Tablet, and Desktop screens.
-* **🔐 Secure Authentication:** Supports Email/Password login and Google Social Login.
-* **📅 Dynamic Booking:** Users can select duration (days/hours) and detailed location (Division, District, City, Area).
-* **💰 Automatic Cost Calculation:** Costs are calculated dynamically based on `duration × service charge`.
-* **📑 My Bookings Dashboard:** Users can track their booking status: **Pending, Confirmed, Completed, or Cancelled**.
-* **🛡️ Private Route Persistence:** Logged-in users are not redirected to the login page on page reloads.
-* **📧 Email Invoicing:** Sends an automated email invoice to the user immediately after booking.
-* **🔍 Metadata & SEO:** Dynamic page titles for the Homepage and Service Detail pages for better SEO.
+- **📱 Fully Responsive Design** – Perfect experience on mobile, tablet & desktop
+- **🔐 Secure Authentication** – Email/Password + Google Social Login (Firebase)
+- **📅 Smart Booking System** – Choose duration (hours/days) + precise location (Division → District → City → Area)
+- **💰 Real-time Cost Calculation** – Instant price update based on service rate × duration
+- **📑 My Bookings Dashboard** – Track status: Pending / Confirmed / Completed / Cancelled
+- **🛡️ Protected Routes** – Private pages persist after refresh (no unnecessary login redirect)
+- **🔍 SEO Friendly** – Dynamic page titles & metadata using React Helmet Async
+- **📸 Smooth Animations** – Powered by Framer Motion
+- **📧 Email Notifications** – Booking confirmations (EmailJS / Nodemailer)
 
----
+## 🛠️ Tech Stack
 
-## 💻 Tech Stack
+| Layer            | Technologies                              |
+|------------------|-------------------------------------------|
+| **Frontend**     | React.js, Tailwind CSS, React Router v6, Framer Motion, Axios |
+| **Backend**      | Node.js, Express.js, MongoDB, Mongoose    |
+| **Authentication**| Firebase Authentication + JWT             |
+| **Deployment**   | Vercel (Frontend), Render (Backend)       |
+| **Utilities**    | React Helmet Async, EmailJS / Nodemailer  |
 
-| Layer | Technologies Used |
-| :--- | :--- |
-| **Frontend** | React.js, Tailwind CSS, Framer Motion, Axios, React Router v6 |
-| **Backend** | Node.js, Express.js, MongoDB, Mongoose |
-| **Auth** | Firebase Authentication, JWT (JSON Web Token) |
-| **Deployment** | Vercel (Frontend), Render (Backend) |
-| **Utilities** | React Helmet Async, EmailJS / Nodemailer |
+## 🗂️ Pages & Routes
 
----
+| Route                        | Description                                                                 |
+|------------------------------|-----------------------------------------------------------------------------|
+| `/`                          | Homepage – Hero banner, About, Services overview                            |
+| `/service/:service_id`       | Detailed service page with “Book Now” button                                |
+| `/booking/:service_id`       | **Private** – Step-by-step booking with live cost preview                   |
+| `/login`                     | Login with Email/Password or Google                                         |
+| `/register`                  | Registration with NID, Name, Phone, strong password validation              |
+| `/my-bookings`               | **Private** – Table of all bookings with status & actions                   |
+| `*`                          | Custom 404 page with “Back to Home” button                                  |
 
-## 🛤️ Pages & Routes
+## 🚀 Quick Start
 
-1.  **Homepage (`/`):** Motivational banner/slider, About section, and an overview of services.
-2.  **Service Details (`/service/:service_id`):** Deep dive into specific service info with a "Book Service" button.
-3.  **Booking Page (`/booking/:service_id`):** (Private Route) Step-by-step booking process with live cost calculation.
-4.  **Authentication:**
-    * **Login Page:** Email and Password access.
-    * **Registration:** Form includes NID No, Name, Contact, and strict Password validation (6+ chars, 1 Upper, 1 Lower).
-5.  **My Bookings (`/my-bookings`):** (Private Route) Table view of all bookings with status and action buttons.
-6.  **Error Page (404):** A custom page for invalid routes with a return-to-home button.
+### Prerequisites
+- Node.js ≥ 16
 
----
+### Installation
 
-## ⚙️ Installation & Setup
+```bash
+# 1. Clone the repository
+git clone https://github.com/tanimahamed07/care-xyz-client.git
+cd care-xyz-client
 
-1.  **Clone the Repository:**
-    ```bash
-    git clone [https://github.com/tanimahamed07/care-xyz-client.git](https://github.com/tanimahamed07/care-xyz-client.git)
-    ```
+# 2. Install dependencies
+npm install
 
-2.  **Install Dependencies:**
-    ```bash
-    npm install
-    ```
+# 3. Create .env.local file and add your Firebase config
+# Example:
+VITE_apiKey=your_api_key
+VITE_authDomain=your_project.firebaseapp.com
+VITE_projectId=your_project_id
+VITE_storageBucket=your_project.appspot.com
+VITE_messagingSenderId=your_sender_id
+VITE_appId=your_app_id
 
-3.  **Setup Environment Variables:**
-    Create a `.env.local` file in the root and add:
-    ```env
-    VITE_apiKey=your_firebase_key
-    VITE_authDomain=your_auth_domain
-    VITE_projectId=your_project_id
-    VITE_storageBucket=your_storage_bucket
-    VITE_messagingSenderId=your_sender_id
-    VITE_appId=your_app_id
-    ```
-
-4.  **Run Development Server:**
-    ```bash
-    npm run dev
-    ```
-
----
-
-### 👨‍💻 Contributor
-**Tanim Ahammed** [GitHub Profile](https://github.com/tanimahamed07) | [Your Portfolio](https://your-portfolio.com)
-
----
+# 4. Start development server
+npm run dev
