@@ -1,11 +1,8 @@
 <p align="center">
   <img src="https://i.ibb.co.com/twR8PmSG/Screenshot-2026-01-17-at-11-44-34-AM.png" alt="Care.xyz Banner"/>
   <br><br>
-  <a href="https://your-live-link.com">
+  <a href="https://care-xyz-blush.vercel.app">
     <img src="https://img.shields.io/badge/Live%20Demo-10b981?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
-  </a>
-  <a href="https://care-xyz-blush.vercel.app/">
-    <img src="https://img.shields.io/github/stars/tanimahamed07/care-xyz-client?style=for-the-badge&color=10b981" alt="GitHub Stars">
   </a>
 </p>
 
